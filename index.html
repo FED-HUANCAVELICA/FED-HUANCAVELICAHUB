@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FED 2.0 STRATEGIC HUB — WANKA WILLKA | HUANCAVELICA 2025-2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+/* ============================================================
+   FED STRATEGIC HUB — WANKA WILLKA
+   Modo Claro / Diseño de Alta Gerencia Corporativa
+   DGIPAT-MIDIS · Huancavelica · 2025-2026
+   ============================================================ */
+
+:root {
+  --bg-primary:    #f8fafc; /* Gris claro premium de fondo */
+  --bg-card:       #ffffff; /* Tarjetas blancas impolutas */
+  --bg-card-hover: #f1f5f9;
+  --bg-panel:      #ffffff;
+  --border:        #e2e8f0; /* Bordes suaves */
+  --border-hi:     #cbd5e1;
+  --text-primary:  #0f172a; /* Texto principal Slate 900 */
+  --text-sec:      #475569; /* Slate 600 */
+  --text-muted:    #64748b; /* Slate 500 */
+  --blue:          #2563eb; /* Azul corporativo fuerza */
+  --blue-lt:       #3b82f6;
+  --green:         #10b981; /* Verde esmeralda de cumplimiento */
+  --green-bg:      rgba(16,185,129,0.12);
+  --yellow:        #d97706; /* Amarillo/Ámbar de proceso con buen contraste */
+  --yellow-bg:     rgba(245,158,11,0.12);
+  --red:           #ef4444; /* Rojo de alerta crítica */
+  --red-bg:        rgba(239,68,68,0.12);
+  --purple:        #7c3aed;
+  --radius:        16px;
+  --radius-sm:     8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ─── HEADER UNIFICADO FED 2.0 ────────────────── */
+.header {
+  background: #0f172a; /* Deep Navy unificado */
+  border-bottom: 1px solid #1e293b;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: #ffffff;
+}
+
+.header-left { display: flex; align-items: center; gap: 14px; }
+
+.logo-box {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+  background: #1e293b;
+}
+.logo-box img {
+  width: 100%; height: 100%;
+  object-fit: cover; border-radius: 50%;
+}
+.logo-box .logo-fallback { font-size: 26px; display: none; }
+.logo-box img[src=""] ~ .logo-fallback,
+.logo-box img:not([src]) ~ .logo-fallback { display: block; }
+
+.header-title {
+  font-size: 18px; font-weight: 800; letter-spacing: -.4px;
+  color: #ffffff;
+}
+.header-sub {
+  font-size: 10px; color: #94a3b8; margin-top: 2px;
+  letter-spacing: .6px; text-transform: uppercase;
+}
+
+.logos-banner { display: flex; gap: 15px; align-items: center; }
+.logos-banner img {
+  max-height: 38px;
+  object-fit: contain;
+  filter: brightness(1.2);
+}
+
+.selector-group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+select {
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid var(--border-hi);
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all .2s;
+}
+select:hover { border-color: var(--blue); background: #f8fafc; }
+
+.live-badge {
+  background: rgba(37, 99, 235, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: 8px;
+  padding: 6px 13px;
+  font-size: 9px; font-weight: 700;
+  display: flex; align-items: center; gap: 7px;
+  letter-spacing: .35px;
+}
+
+/* ─── TABS MODO CLARO ────────────────────────────── */
+.tabs-nav {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  display: flex; gap: 4px;
+  overflow-x: auto;
+  position: sticky;
+  top: 89px;
+  z-index: 150;
+  box-shadow: 0 4px 10px rgba(0,0,0,.02);
+}
+
+.tab-btn {
+  padding: 16px 26px;
+  background: none; border: none;
+  color: var(--text-muted);
+  font-size: 12.5px; font-weight: 700;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all .2s;
+  letter-spacing: .5px;
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 8px;
+}
+.tab-btn:hover { color: var(--text-primary); background: #f8fafc; }
+.tab-btn.active {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+  background: #eff6ff;
+}
+.tab-count {
+  font-size: 10px; font-weight: 700;
+  background: #f1f5f9; color: var(--text-sec);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 1px 7px;
+}
+.tab-btn.active .tab-count { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+/* ─── MAIN ────────────────────────────────────────── */
+.main { padding: 24px 28px; max-width: 1440px; margin: 0 auto; }
+
+/* ─── BANNER GLOBAL NORTH STAR CLARO ──────────────── */
+.north-star {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 28px;
+  margin-bottom: 26px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 4px 15px rgba(0,0,0,.01);
+  flex-wrap: wrap; gap: 20px;
+}
+
+.period-selector {
+  display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;
+  border-right: 1px solid var(--border); padding-right: 24px;
+}
+.period-tag { font-size: 9px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+.period-controls { display: flex; gap: 8px; align-items: center; }
+.period-controls select { border: 1px solid var(--border-hi); background: #f8fafc; padding: 8px 12px; font-size: 12px; }
+.period-current { font-size: 11px; color: var(--blue); margin-top: 2px; font-weight: 700; }
+
+.ns-stats-center { flex: 1; display: flex; align-items: stretch; justify-content: center; }
+.stat-card { flex: 1; text-align: center; padding: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.stat-big { font-size: 44px; font-weight: 900; line-height: 1; }
+.stat-lbl2 { font-size: 10px; color: var(--text-muted); margin-top: 6px; font-weight: 700; text-transform: uppercase; }
+.stat-card-green  .stat-big { color: var(--green); }
+.stat-card-yellow .stat-big { color: var(--yellow); }
+.stat-card-red    .stat-big { color: var(--red); }
+.stat-card-total  .stat-big { color: var(--text-primary); }
+.stat-divider { width: 1px; align-self: stretch; background: var(--border); margin: 8px 0; }
+
+.sem-legend { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; border-left: 1px solid var(--border); padding-left: 24px; }
+.sem-legend-title { font-size: 9px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; font-weight: 700; margin-bottom: 2px; }
+.leg-item  { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-sec); font-weight: 500; }
+.leg-dot   { width: 10px; height: 10px; border-radius: 50%; }
+
+/* ─── SECTOR SECTIONS EN MODO CLARO ──────────────── */
+.sector-group { margin-bottom: 28px; }
+.sector-hdr {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--border);
+}
+.sector-badge { padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.sec-agua  { background: #eff6ff;  color: #2563eb; border: 1px solid #bfdbfe; }
+.sec-salud { background: #ecfdf5;  color: #059669; border: 1px solid #a7f3d0; }
+.sec-edu   { background: #fffbeb;  color: #d97706; border: 1px solid #fde68a; }
+.sec-ei    { background: #fff7ed;  color: #ea580c; border: 1px solid #ffedd5; }
+.sec-art   { background: #faf5ff;  color: #7c3aed; border: 1px solid #f3e8ff; }
+.sec-vif   { background: #fff5f5;  color: #e53e3e; border: 1px solid #fed7d7; }
+
+.cp-badge { font-size: 9px; font-weight: 700; background: #f1f5f9; color: var(--blue); border: 1px solid var(--border-hi); border-radius: 4px; padding: 1px 5px; }
+.nd-row { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); }
+.nd-row b { color: var(--text-primary); font-weight: 700; }
+.nd-sep   { color: var(--border-hi); }
+.sector-title { font-size: 13.5px; font-weight: 700; color: var(--text-primary); }
+.sector-count { font-size: 11px; color: var(--text-muted); margin-left: auto; font-weight: 600; }
+
+/* ─── CARDS PREMIUM CLARAS ────────────────────────── */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; cursor: pointer;
+  transition: all .2s ease; position: relative; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,.01);
+}
+.card:hover  { border-color: var(--border-hi); background: #f8fafc; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,.03); }
+.card.active { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue), 0 4px 15px rgba(37,99,235,.1); }
+
+.card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+.card-code { font-size: 10px; font-weight: 700; color: var(--text-sec); background: #f1f5f9; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border); }
+
+.semaforo { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+.sem-g { background: var(--green-bg);  color: var(--green);  border: 2px solid rgba(16,185,129,.4); }
+.sem-y { background: var(--yellow-bg); color: var(--yellow); border: 2px solid rgba(245,158,11,.4); }
+.sem-r { background: var(--red-bg);    color: var(--red);    border: 2px solid rgba(239,68,68,.4); }
+.sem-n { background: #f1f5f9; color: var(--text-muted); border: 2px solid var(--border-hi); font-size: 11px; }
+
+.card-name { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; line-height: 1.45; min-height: 34px; }
+.card-val-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 10px; }
+.card-num { font-size: 32px; font-weight: 800; line-height: 1; }
+.card-unit { font-size: 13px; color: var(--text-sec); font-weight: 600; margin-bottom: 2px; }
+
+.lbmeta { display: flex; gap: 4px; flex-direction: column; align-items: flex-end; }
+.lb-pill { font-size: 10px; padding: 2px 7px; border-radius: 4px; font-weight: 600; background: #f1f5f9; color: var(--text-sec); border: 1px solid var(--border); }
+.meta-pill { font-size: 10px; padding: 2px 7px; border-radius: 4px; font-weight: 600; background: #eff6ff; color: var(--blue); border: 1px solid #bfdbfe; }
+
+.prog-track { width: 100%; height: 6px; background: #e2e8f0; border-radius: 4px; overflow: hidden; margin-top: 10px; }
+.prog-fill { height: 100%; border-radius: 4px; transition: width .5s ease; }
+
+.estado-row { margin-top: 10px; display: flex; justify-content: flex-start; }
+.estado-badge { font-size: 9.5px; font-weight: 700; padding: 3px 9px; border-radius: 12px; text-transform: uppercase; }
+.estado-cumplida { background: #ecfdf5;  color: var(--green); border: 1px solid #a7f3d0; }
+.estado-superada { background: #d1fae5;  color: #047857;     border: 1px solid #6ee7b7; font-weight: 800; }
+.estado-proceso  { background: #fffbeb;  color: var(--yellow); border: 1px solid #fde68a; }
+.estado-critico  { background: #fff5f5;  color: var(--red);    border: 1px solid #fed7d7; }
+
+.dir-badge { font-size: 9px; font-weight: 700; background: #f5f3ff; color: #6d28d9; border: 1px solid #e9d5ff; border-radius: 4px; padding: 1px 5px; }
+
+/* ─── CAJAS DE RECOMENDACIÓN CON COLORES CLAROS ───── */
+.recom-box {
+  margin-top: 10px; padding: 8px 10px; border-radius: 8px; font-size: 11px; line-height: 1.45;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden;
+}
+.recom-box::before { content: 'Acción Inmediata:'; display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; }
+.recom-critico { background: #fff5f5; border-left: 3px solid var(--red); color: #991b1b; }
+.recom-proceso { background: #fffbeb; border-left: 3px solid #f59e0b; color: #92400e; }
+.recom-fallback { font-style: italic; opacity: 0.7; text-transform: uppercase; font-size: 10px; }
+
+.card-trend-hint { margin-top: 10px; font-size: 10px; color: var(--text-muted); text-align: right; font-weight: 500; }
+.card:hover .card-trend-hint { color: var(--blue); }
+
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+.footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 11px; border-top: 1px solid var(--border); margin-top: 40px; background: #ffffff; }
+
+/* ─── MODAL DE AVANCE MENSUAL CLARO ───────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 600;
+  display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px);
+  opacity: 0; visibility: hidden; transition: all .2s;
+}
+.modal-overlay.open { opacity: 1; visibility: visible; }
+.modal-box {
+  background: #ffffff; border: 1px solid var(--border-hi); border-radius: 20px; width: 100%; max-width: 850px;
+  max-height: 90vh; overflow-y: auto; padding: 28px 30px; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05);
+  transform: translateY(10px); transition: all .2s;
+}
+.modal-overlay.open .modal-box { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 16px; right: 16px; background: #f1f5f9; border: 1px solid var(--border);
+  color: var(--text-sec); border-radius: 8px; padding: 6px 14px; cursor: pointer; font-size: 12px; font-weight: 700;
+}
+.modal-close:hover { background: #e2e8f0; color: var(--text-primary); }
+.modal-hdr { margin-bottom: 16px; }
+.modal-code-tag { font-size: 10px; font-weight: 700; color: var(--text-sec); background: #f1f5f9; padding: 3px 9px; border-radius: 4px; border: 1px solid var(--border); display: inline-block; margin-bottom: 8px; }
+.modal-title { font-size: 15px; font-weight: 800; color: var(--text-primary); margin-bottom: 4px; }
+.modal-sub   { font-size: 11.5px; color: var(--text-sec); line-height: 1.5; }
+.modal-pills { display: flex; gap: 7px; flex-wrap: wrap; margin: 12px 0; }
+.modal-pill-item { font-size: 11px; padding: 4px 12px; border-radius: 6px; font-weight: 600; }
+.modal-pill-meta { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.modal-pill-lb   { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+.modal-pill-tipo { background: #f5f3ff; color: #6d28d9; border: 1px solid #e9d5ff; }
+
+.modal-recom-box { margin: 14px 0 4px; padding: 10px 14px; border-radius: 8px; font-size: 12px; line-height: 1.5; }
+.modal-recom-box::before { content: '⚡ Acción Inmediata:'; display: block; font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
+.modal-recom-box.recom-critico { background: #fff5f5; border-left: 4px solid var(--red); color: #991b1b; }
+.modal-recom-box.recom-proceso  { background: #fffbeb; border-left: 4px solid #f59e0b; color: #92400e; }
+
+.modal-chart-wrap { position: relative; height: 320px; }
+.modal-legend-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px; font-size: 11px; color: var(--text-sec); align-items: center; padding-top: 14px; border-top: 1px solid var(--border); }
+.modal-leg-item  { display: flex; align-items: center; gap: 6px; }
+.modal-leg-line  { width: 24px; height: 0; border-top: 2.5px dashed; }
+.modal-leg-swatch{ width: 12px; height: 12px; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER UNIFICADO DE ALTA GERENCIA CON INCORPORACIÓN FED 2.0 -->
+<header class="header">
+  <div class="header-left">
+    <div class="logo-box">
+      <img src="logo_wanka_willka.png.png" alt="FED Wanka Willka" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+      <span class="logo-fallback">🏔</span>
+    </div>
+    <div>
+      <div class="header-title">🚀 FED 2.0 STRATEGIC HUB — WANKA WILLKA</div>
+      <div class="header-sub">Fondo de Estímulo al Desempeño · DGIPAT-MIDIS · Región Huancavelica · 2025-2026[cite: 1]</div>
+    </div>
+  </div>
+  
+  <div class="logos-banner">
+      <img src="logo-midis.png.jpg" alt="MIDIS">
+      <img src="logo-fed.png.png" alt="FED">
+  </div>
+  <div class="selector-group">
+      <div class="live-badge">MONITOREO FED 2.0: TRAMO 1 (DIC 2025 - MAY 2026)[cite: 1]</div>
+  </div>
+</header>
+
+<!-- NAVEGACIÓN POR TABS -->
+<nav class="tabs-nav" id="tabsNav">
+  <button class="tab-btn active" onclick="switchTab(1, this)">
+    ⚙️ COMPROMISOS DE GESTIÓN[cite: 1]
+    <span class="tab-count" id="tabCount1">—</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab(2, this)">
+    🎯 METAS DE COBERTURA[cite: 1]
+    <span class="tab-count" id="tabCount2">—</span>
+  </button>
+</nav>
+
+<main class="main">
+
+  <!-- BANNER DE RESUMEN GLOBAL (PERÍODO Y SEMÁFOROS) -->
+  <div class="north-star">
+    <div class="period-selector">
+      <div class="period-tag">📅 Período de Reporte[cite: 1]</div>
+      <div class="period-controls">
+        <select id="selYear" onchange="updateDashboard()" title="Año de evaluación">
+          <option value="2025">Año 2025[cite: 1]</option>
+          <option value="2026" selected>Año 2026[cite: 1]</option>
+        </select>
+        <select id="selMonth" onchange="updateDashboard()" title="Mes de corte">
+          <option value="0">Enero[cite: 1]</option>
+          <option value="1">Febrero[cite: 1]</option>
+          <option value="2">Marzo[cite: 1]</option>
+          <option value="3">Abril[cite: 1]</option>
+          <option value="4" selected>Mayo[cite: 1]</option>
+          <option value="5">Junio[cite: 1]</option>
+          <option value="6">Julio[cite: 1]</option>
+          <option value="7">Agosto[cite: 1]</option>
+          <option value="8">Septiembre[cite: 1]</option>
+          <option value="9">Octubre[cite: 1]</option>
+          <option value="10">Noviembre[cite: 1]</option>
+          <option value="11">Diciembre[cite: 1]</option>
+        </select>
+      </div>
+      <div class="period-current" id="periodCurrent">Corte: Mayo 2026[cite: 1]</div>
+    </div>
+
+    <div class="ns-stats-center">
+      <div class="stat-card stat-card-green">
+        <div class="stat-big" id="nsGreen">—</div>
+        <div class="stat-lbl2">En Meta ✓[cite: 1]</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card stat-card-yellow">
+        <div class="stat-big" id="nsYellow">—</div>
+        <div class="stat-lbl2">En Proceso ![cite: 1]</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card stat-card-red">
+        <div class="stat-big" id="nsRed">—</div>
+        <div class="stat-lbl2">Crítico ✗[cite: 1]</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-card stat-card-total">
+        <div class="stat-big" id="nsTotal">—</div>
+        <div class="stat-lbl2">Total indicadores[cite: 1]</div>
+      </div>
+    </div>
+
+    <div class="sem-legend">
+      <div class="sem-legend-title">Semáforo de Cumplimiento[cite: 1]</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Verde ≥ 100% de la meta[cite: 1]</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--yellow)"></div>Amarillo 70 – 99% de la meta[cite: 1]</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--red)"></div>Rojo &lt; 70% de la meta[cite: 1]</div>
+    </div>
+  </div>
+
+  <!-- PANAL 1: COMPROMISOS DE GESTIÓN -->
+  <div id="pane-1" class="tab-pane active">
+    <div class="sector-group">
+      <div class="sector-hdr">
+        <span class="sector-badge sec-salud">💊 SI-01 — Gestantes: Hierro y Hb[cite: 1]</span>
+        <span class="sector-title">Gestantes con Suplementación de Hierro y Dosaje de Hemoglobina[cite: 1]</span>
+        <span class="sector-count">3 sub-indicadores[cite: 1]</span>
+      </div>
+      <div class="cards-grid" id="grid-si01"></div>
+    </div>
+
+    <div class="sector-group">
+      <div class="sector-hdr">
+        <span class="sector-badge sec-salud">🍼 SI-02 — Niños/as 12m: Hierro y Hb[cite: 1]</span>
+        <span class="sector-title">Niñas y Niños de 12 Meses con Suplementación de Hierro y Dosaje de Hemoglobina[cite: 1]</span>
+        <span class="sector-count">4 sub-indicadores[cite: 1]</span>
+      </div>
+      <div class="cards-grid" id="grid-si02"></div>
+    </div>
+
+    <div class="sector-group">
+      <div class="sector-hdr">
+        <span class="sector-badge sec-salud">🎒 SI-03 — Adolescentes Mujeres 12-17: Hb[cite: 1]</span>
+        <span class="sector-title">Adolescentes Mujeres 12–17 Años con Dosaje de Hemoglobina y Prestaciones Priorizadas[cite: 1]</span>
+        <span class="sector-count">2 sub-indicadores[cite: 1]</span>
+      </div>
+      <div class="cards-grid" id="grid-si03"></div>
+    </div>
+
+    <div class="sector-group">
+      <div class="sector-hdr">
+        <span class="sector-badge sec-vif">🛡 VI-01 — Gestantes: Tamizaje e Intervención[cite: 1]</span>
+        <span class="sector-title">Gestantes con Tamizaje Positivo de Violencia e Intervención Terapéutica[cite: 1]</span>
+        <span class="sector-count">2 sub-indicadores[cite: 1]</span>
+      </div>
+      <div class="cards-grid" id="grid-vi01"></div>
+    </div>
+
+    <div class="sector-group">
+      <div class="sector-hdr">
+        <span class="sector-badge sec-ei">🌄 Ed. Inclusiva / Rural[cite: 1]</span>
+        <span class="sector-title">Educación Inclusiva (EI)[cite: 1]</span>
+        <span class="sector-count">3 indicadores[cite: 1]</span>
+      </div>
+      <div class="cards-grid" id="grid-ei"></div>
+    </div>
+
+    <div class="sector-group">
+      <div class="sector-hdr">
+        <span class="sector-badge sec-agua">💧 Agua y Saneamiento[cite: 1]</span>
+        <span class="sector-title">Acciones Integrales (AI)[cite: 1]</span>
+        <span class="sector-count">6 indicadores[cite: 1]</span>
+      </div>
+      <div class="cards-grid" id="grid-ai"></div>
+    </div>
+
+    <div class="sector-group">
+      <div class="sector-hdr">
+        <span class="sector-badge sec-art">🔗 Articulación[cite: 1]</span>
+        <span class="sector-title">Articulación Territorial (ART)[cite: 1]</span>
+        <span class="sector-count">1 indicador[cite: 1]</span>
+      </div>
+      <div class="cards-grid" id="grid-art"></div>
+    </div>
+  </div>
+
+  <!-- PANAL 2: METAS DE COBERTURA -->
+  <div id="pane-2" class="tab-pane">
+    <div class="sector-group">
+      <div class="sector-hdr">
+        <span class="sector-badge sec-salud">❤️ Salud[cite: 1]</span>
+        <span class="sector-title">Metas de Cobertura — Salud (MC)[cite: 1]</span>
+        <span class="sector-count">4 indicadores[cite: 1]</span>
+      </div>
+      <div class="cards-grid" id="grid-salud"></div>
+    </div>
+
+    <div class="sector-group">
+      <div class="sector-hdr">
+        <span class="sector-badge sec-edu">📚 Educación[cite: 1]</span>
+        <span class="sector-title">Metas de Cobertura — Educación (MC)[cite: 1]</span>
+        <span class="sector-count">4 indicadores[cite: 1]</span>
+      </div>
+      <div class="cards-grid" id="grid-edu"></div>
+    </div>
+  </div>
+
+  <!-- CONTENEDOR DE SEGUIMIENTO INTERNO -->
+  <div class="chart-section" style="display:none" aria-hidden="true">
+    <div id="chartPlaceholder"></div>
+    <div class="chart-canvas-wrap" id="chartWrap"><canvas id="trendChart"></canvas></div>
+    <div class="chart-info-pill" id="chartPill"></div>
+    <div id="chartTitle"></div><div id="chartSub"></div>
+  </div>
+
+</main>
+
+<!-- MODAL CORPORATIVO EDICIÓN CLARA -->
+<div class="modal-overlay" id="trendModal" onclick="handleModalOverlayClick(event)">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" onclick="closeModal()" title="Cerrar">✕ Cerrar</button>
+    <div class="modal-hdr">
+      <div class="modal-code-tag" id="modalCode">—</div>
+      <div class="modal-title" id="modalTitle">—</div>
+      <div class="modal-sub"   id="modalSub">—</div>
+      <div class="modal-pills">
+        <span class="modal-pill-item modal-pill-meta" id="modalPillMeta"></span>
+        <span class="modal-pill-item modal-pill-lb"   id="modalPillLB"></span>
+        <span class="modal-pill-item modal-pill-tipo" id="modalPillTipo"></span>
+      </div>
+    </div>
+    <div class="modal-chart-wrap">
+      <canvas id="modalChart"></canvas>
+    </div>
+    <div class="modal-legend-row">
+      <div class="modal-leg-item"><div class="modal-leg-line" style="border-color:#2563eb"></div>Meta (punteada azul)[cite: 1]</div>
+      <div class="modal-leg-item"><div class="modal-leg-line" style="border-color:#3b82f6"></div>Línea Base (celeste)[cite: 1]</div>
+      <div class="modal-leg-item"><div class="modal-leg-swatch" style="background:#10b981"></div>Verde ≥ 100%[cite: 1]</div>
+      <div class="modal-leg-item"><div class="modal-leg-swatch" style="background:#f59e0b"></div>Amarillo 70-99%[cite: 1]</div>
+      <div class="modal-leg-item"><div class="modal-leg-swatch" style="background:#ef4444"></div>Rojo &lt; 70%[cite: 1]</div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  FED 2.0 STRATEGIC HUB WANKA WILLKA · DGIPAT-MIDIS · Región Huancavelica · 2025-2026[cite: 1]
+  <br>Cumplimiento topado a 100% — Verde ≥ 100% · Amarillo 70-99% · Rojo &lt; 70%[cite: 1]
+</footer>
+
+<script>
+Chart.register(ChartDataLabels);
+
+/* ══════════════════════════════════════════════════════════════════
+   BUNKER DE DATOS MANTENIDO INTACTO SEGÚN FICHA TÉCNICA
+   ══════════════════════════════════════════════════════════════════ */
+const INDICADORES = {
+  "AI-01.01": {
+    nombre:    "AI-01.01 — Cloro y Turbiedad (Paso 1)[cite: 1]",
+    detalle:   "CCPP con cloro residual ≥0.5 mg/L y turbiedad apta para consumo humano. Medición mensual DATASS/DIGESA-MINSA.[cite: 1]",
+    sector:    "AI", tab: 1, tipo: 'entero', unidad: 'CCPP', lb: 61, meta: 185,[cite: 1]
+    recomendacion: "Actualizar DATASS. Verificar equipos de cloración en CCPP rezagados y coordinar brigadas DIGESA para muestreo mensual prioritario.[cite: 1]",
+    datos: {
+      2025: { ene: 55, feb: 58, mar: 61, abr: 64, may: 66, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: null, feb: null, mar: 49, abr: null, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "AI-01.02": {
+    nombre:    "AI-01.02 — Diagnóstico Excretas (Paso 2)[cite: 1]",
+    detalle:   "CCPP con diagnóstico de disposición sanitaria de excretas por hogar completado. Registro DATASS/MVCS.[cite: 1]",
+    sector:    "AI", tab: 1, tipo: 'entero', unidad: 'CCPP', lb: 0, meta: 62,[cite: 1]
+    recomendacion: "Implementar diagnósticos de excretas en CCPP pendientes. Articular con DIGESA visitas de campo y asegurar registro DATASS antes del corte.[cite: 1]",
+    datos: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: null, feb: null, mar: 50, abr: null, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "AI-02": {
+    nombre:    "Vigilancia de la Calidad del Agua[cite: 1]",
+    detalle:   "Vigilancia de la calidad del agua para consumo humano[cite: 1]",
+    sector:    "AI", tab: 1, tipo: 'entero', unidad: 'CCPP', lb: 0, meta: 137,[cite: 1]
+    recomendacion: "Intensificar vigilancia sanitaria en CCPP rezagados. Coordinar con DIGESA-MINSA muestreos pendientes y actualizar registros de calidad.[cite: 1]",
+    datos: {
+      2025: { ene: 44, feb: 48, mar: 52, abr: 56, may: 59, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: 458, feb: 458, mar: 339, abr: null, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "AI-03": {
+    nombre:    "Acciones Correctivas en Sistemas con Riesgo[cite: 1]",
+    detalle:   "Implementación de acciones correctivas en sistemas de agua con riesgo sanitario[cite: 1]",
+    sector:    "AI", tab: 1, tipo: 'entero', unidad: 'Sistemas', lb: 41, meta: 45,[cite: 1]
+    recomendacion: "Priorizar sistemas con riesgo sanitario alto. Gestionar con MVCS expedientes técnicos de corrección y acelerar intervenciones PNSR pendientes.[cite: 1]",
+    datos: {
+      2025: { ene: 34, feb: 38, mar: 42, abr: 47, may: 51, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: null, feb: null, mar: 33, abr: null, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "AI-04": {
+    nombre:    "Valoración de Servicios EduSan[cite: 1]",
+    detalle:   "Valoración de los Servicios de agua y saneamiento (EduSan)[cite: 1]",
+    sector:    "AI", tab: 1, tipo: 'entero', unidad: 'CCPP', lb: 0, meta: 2,[cite: 1]
+    recomendacion: "Acelerar talleres EduSan en CCPP objetivo. Articular con PNSR-MVCS capacitaciones a JASs y asegurar registro de valoración en plataforma.[cite: 1]",
+    datos: {
+      2025: { ene: 38, feb: 42, mar: 46, abr: 50, may: 54, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: null, feb: null, mar: null, abr: 1, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "AI-05": {
+    nombre:    "Sostenibilidad de Saneamiento en IIEE[cite: 1]",
+    detalle:   "Sostenibilidad del servicio de saneamiento y control de calidad del agua en IIEE públicas[cite: 1]",
+    sector:    "AI", tab: 1, tipo: 'entero', unidad: 'IIEE', lb: 0, meta: 10,[cite: 1]
+    recomendacion: "Verificar estado sanitario en IIEE críticas. Gestionar con PRONIED y MVCS intervención técnica inmediata y cierre de brechas antes del siguiente corte.[cite: 1]",
+    datos: {
+      2025: { ene: 49, feb: 53, mar: 57, abr: 61, may: 64, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: null, feb: null, mar: null, abr: 12, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "MC-01": {
+    nombre:    "Gestantes con Parto Institucional[cite: 1]",
+    detalle:   "Paquete integrado de servicios a gestantes con parto institucional (quintiles 1 y 2)[cite: 1]",
+    sector:    "SALUD", tab: 2, tipo: 'porcentaje', lb: 44.6, meta: 46.6,[cite: 1]
+    datos: {
+      2025: { ene: 73, feb: 75, mar: 78, abr: 80, may: 82, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: 36.5, feb: 49.6, mar: 33.6, abr: 37.7, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "MC-02": {
+    nombre:    "Niños < 12 Meses — Paquete Integrado[cite: 1]",
+    detalle:   "Paquete integrado de servicios a niños/as menores de 12 meses (quintiles 1 y 2)[cite: 1]",
+    sector:    "SALUD", tab: 2, tipo: 'porcentaje', lb: 73.5, meta: 75.5,[cite: 1]
+    datos: {
+      2025: { ene: 68, feb: 71, mar: 73, abr: 76, may: 78, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: 47.0, feb: 39.9, mar: 85.4, abr: 87.4, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "MC-03": {
+    nombre:    "Recién Nacidos: Vacunas, CRED y Tamizaje[cite: 1]",
+    detalle:   "Recién nacidos con vacunas BCG, HvB, controles CRED y tamizaje neonatal[cite: 1]",
+    sector:    "SALUD", tab: 2, tipo: 'porcentaje', lb: 69.6, meta: 73,[cite: 1]
+    datos: {
+      2025: { ene: 75, feb: 77, mar: 79, abr: 82, may: 84, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: 65.0, feb: 80.7, mar: 72.8, abr: 68.0, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "MC-08": {
+    nombre:    "Niños < 60 Meses con Agua Clorada ≥ 0.5 mg/L[cite: 1]",
+    detalle:   "Acceso a agua clorada: niños/as < 60 meses con cloro residual ≥ 0.5 mg/L[cite: 1]",
+    sector:    "SALUD", tab: 2, tipo: 'porcentaje', lb: 81.7, meta: 81.0,[cite: 1]
+    datos: {
+      2025: { ene: 58, feb: 61, mar: 65, abr: 68, may: 71, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: null, feb: null, mar: 50, abr: null, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "MC-04": {
+    nombre:    "Matrícula 3 Años en SIAGIE 2026[cite: 1]",
+    detalle:   "Acceso al servicio educativo: matrícula de niños/as de 3 años en SIAGIE 2026[cite: 1]",
+    sector:    "EDUCACION", tab: 2, tipo: 'porcentaje', lb: 80, meta: 95.5,[cite: 1]
+    datos: {
+      2025: { ene: 82, feb: 85, mar: 87, abr: 88, may: 89, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: 90, feb: 91, mar: 92, abr: 93.10, may: 94.6, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "MC-05": {
+    nombre:    "Material Educativo EIB y Rural[cite: 1]",
+    detalle:   "Material educativo para IIEE EIB y rurales (pertinente y suficiente)[cite: 1]",
+    sector:    "EDUCACION", tab: 2, tipo: 'porcentaje', lb: 84.8, meta: 87,[cite: 1]
+    datos: {
+      2025: { ene: 63, feb: 66, mar: 70, abr: 73, may: 75, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: null, feb: null, mar: null, abr: 84.8, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "MC-06": {
+    nombre:    "Docentes EIB — Lengua Originaria (SIFODS)[cite: 1]",
+    detalle:   "Docentes EIB que culminan cursos de lengua originaria en la plataforma SIFODS[cite: 1]",
+    sector:    "EDUCACION", tab: 2, tipo: 'porcentaje', lb: 2.3, meta: 20.6,[cite: 1]
+    datos: {
+      2025: { ene: 43, feb: 47, mar: 51, abr: 55, may: 59, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: 2.3, feb: 2.3, mar: 2.3, abr: 2.3, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "MC-07": {
+    nombre:    "Docentes EBE — Educación Inclusiva[cite: 1]",
+    detalle:   "Docentes EBE que aprueban cursos de educación inclusiva y discapacidad[cite: 1]",
+    sector:    "EDUCACION", tab: 2, tipo: 'porcentaje', lb: 31.4, meta: 37,[cite: 1]
+    datos: {
+      2025: { ene: 38, feb: 42, mar: 47, abr: 51, may: 54, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: 31.4, feb: 31.4, mar: 31.4, abr: 31.4, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "EI-01": {
+    nombre:    "Kits de Bienestar en IIEE MSE Rural[cite: 1]",
+    detalle:   "Kits de bienestar para IIEE MSE secundaria rural — registro en SIGA[cite: 1]",
+    sector:    "EI", tab: 1, tipo: 'porcentaje', lb: 28.6, meta: 67.1,[cite: 1]
+    recomendacion: "Verificar registro SIGA de kits pendientes. Coordinar con DISER-MINEDU la distribución en IIEE MSE Rural rezagadas y confirmar acuse de recibo.[cite: 1]",
+    datos: {
+      2025: { ene: 53, feb: 57, mar: 62, abr: 66, may: 69, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: null, feb: null, mar: null, abr: 100, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "EI-02": {
+    nombre:    "Plazas CAS Cubiertas en Centros EBE[cite: 1]",
+    detalle:   "Plazas CAS cubiertas oportunamente en centros/programas de Educación Básica Especial[cite: 1]",
+    sector:    "EI", tab: 1, tipo: 'porcentaje', lb: 20, meta: 28.6,[cite: 1]
+    recomendacion: "Agilizar convocatoria CAS para plazas EBE vacantes. Coordinar con DEBE-MINEDU el proceso de selección y cobertura antes del corte de evaluación.[cite: 1]",
+    datos: {
+      2025: { ene: 63, feb: 67, mar: 71, abr: 74, may: 77, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: null, feb: null, mar: 54.2, abr: 74.2, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "EI-03": {
+    nombre:    "Mantenimiento Sanitario en IIEE (Mi Mantenimiento)[cite: 1]",
+    detalle:   "Mantenimiento de instalaciones sanitarias en IIEE públicas — Mi Mantenimiento 2026[cite: 1]",
+    sector:    "EI", tab: 1, tipo: 'porcentaje', lb: 60.1, meta: 66,[cite: 1]
+    recomendacion: "Activar Mi Mantenimiento en IIEE pendientes. Revisar avance con PRONIED-MINEDU y gestionar liberación de recursos para IIEE con execution cero.[cite: 1]",
+    datos: {
+      2025: { ene: 48, feb: 52, mar: 57, abr: 61, may: 64, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: null, feb: null, mar: null, abr: 54, may: 83, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "ART-01": {
+    nombre:    "Articulación Territorial FED-MIDIS[cite: 1]",
+    detalle:   "Articulación territorial: PCA-MIDIS / JUNTOS / PNSR-MVCS / DGIPAT-MIDIS[cite: 1]",
+    sector:    "ART", tab: 1, tipo: 'porcentaje', lb: 0, meta: 8,[cite: 1]
+    recomendacion: "Convocar mesa de articulación territorial urgente. Revisar compromisos PCA-MIDIS/JUNTOS y acelerar actas de coordinación intersectorial pendientes.[cite: 1]",
+    datos: {
+      2025: { ene: 58, feb: 62, mar: 67, abr: 71, may: 74, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null },[cite: 1]
+      2026: { ene: null, feb: 4, mar: null, abr: null, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "SI-01.01": {
+    nombre:  "Captación Temprana de Gestantes (APN < 14 SG)[cite: 1]",
+    detalle: "CP — % gestantes captadas con 1ra APN antes de la semana 14. HIS: código parto/control prenatal + semanas gestación < 14. Medición mensual acumulada.[cite: 1]",
+    sector: "SI01", tab: 1, tipo: 'porcentaje', lb: 77.1, meta: 77.9, esCP: true,[cite: 1]
+    recomendacion: "Reforzar captación APN antes de la semana 14. Revisar registros HIS y coordinar con EESS para garantizar cobertura mensual acumulada.[cite: 1]",
+    datos: {
+      2025: { ene: 61.2, feb: 63.5, mar: 65.1, abr: 67.4, may: 69.8, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 72.1, dic: null },[cite: 1]
+      2026: { ene: 76.8, feb: 79.9, mar: 81.3, abr: 79.3,  may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    num: {
+      2025: { ene: 512, feb: 548, mar: 571, abr: 602, may: 631, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 651, dic: null },[cite: 1]
+      2026: { ene: 222, feb: 214, mar: 218, abr: 195,  may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    den: {
+      2025: { ene: 836, feb: 863, mar: 877, abr: 893, may: 904, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 903, dic: null },[cite: 1]
+      2026: { ene: 289, feb: 268, mar: 268, abr: 246,  may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "SI-01.02": {
+    nombre:  "Gestantes con Anemia en Tratamiento Completo con Hierro[cite: 1]",
+    detalle: "% gestantes con diagnóstico de anemia que completan tratamiento: hierro terapéutico + 2 dosajes Hb de control. Solo verificación mayo/noviembre. HIS MINSA.[cite: 1]",
+    sector: "SI01", tab: 1, tipo: 'porcentaje', lb: 76.7, meta: 80.0, esCP: false,[cite: 1]
+    recomendacion: "Intensificar tratamiento hierro en gestantes con anemia. Verificar registro HIS de ciclo completo y los 2 dosajes Hb de control en EESS.[cite: 1]",
+    datos: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 57.8, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 62.4, dic: null },[cite: 1]
+      2026: { ene: 77.6, feb: 80.5, mar: 84.1, abr: 86.6, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    num: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 141, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 167, dic: null },[cite: 1]
+      2026: { ene: 97, feb: 95, mar: 106, abr: 84, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    den: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 244, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 268, dic: null },[cite: 1]
+      2026: { ene: 125, feb: 118, mar: 126, abr: 97, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "SI-01.03": {
+    nombre:  "Gestantes con Prestaciones Completas al Momento del Parto[cite: 1]",
+    detalle: "% gestantes con parto institucional que reciben paquete completo de prestaciones (suplemento hierro + dosaje Hb posparto). Solo verificación mayo/noviembre. HIS MINSA.[cite: 1]",
+    sector: "SI01", tab: 1, tipo: 'porcentaje', lb: 41.2, meta: 45.0, esCP: false,[cite: 1]
+    datos: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 61.3, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 65.7, dic: null },[cite: 1]
+      2026: { ene: 58.3, feb: 52.8, mar: 56.0, abr: 64.0, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    num: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 183, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 196, dic: null },[cite: 1]
+      2026: { ene: 84, feb: 67, mar: 61, abr: 80, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    den: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 298, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 298, dic: null },[cite: 1]
+      2026: { ene: 144, feb: 127, mar: 109, abr: 125, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "SI-02.01": {
+    nombre:  "Niños/as 4 Meses con Suplemento Hierro y Dosaje Hb (CP)[cite: 1]",
+    detalle: "CP — % niños/as de 4 meses con suplementación preventiva de hierro + dosaje de hemoglobina registrado. Padrón nominal. Medición mensual.[cite: 1]",
+    sector: "SI02", tab: 1, tipo: 'porcentaje', lb: 88.5, meta: 88.7, esCP: true,[cite: 1]
+    recomendacion: "El indicador se viene midiendo desde enero[cite: 1]",
+    datos: {
+      2025: { ene: 56.9, feb: 59.4, mar: 62.1, abr: 65.3, may: 68.7, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 71.4, dic: null },[cite: 1]
+      2026: { ene: 89.8, feb: 92.7, mar: 88.0, abr: 79.2,  may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    num: {
+      2025: { ene: 307, feb: 327, mar: 348, abr: 371, may: 397, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 419, dic: null },[cite: 1]
+      2026: { ene: 229, feb: 230, mar: 257, abr: 217,  may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    den: {
+      2025: { ene: 539, feb: 550, mar: 561, abr: 568, may: 578, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 587, dic: null },[cite: 1]
+      2026: { ene: 255, feb: 248, mar: 292, abr: 274,  may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "SI-02.02": {
+    nombre:  "Prematuros/Bajo Peso sin Anemia con Tratamiento Completo[cite: 1]",
+    detalle: "% niños/as prematuros o con bajo peso al nacer (sin anemia) que reciben hierro preventivo + 2 dosajes Hb de control. Solo verificación mayo/noviembre.[cite: 1]",
+    sector: "SI02", tab: 1, tipo: 'porcentaje', lb: 42.6, meta: 53.6, esCP: false,[cite: 1]
+    datos: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 45.2, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 51.8, dic: null },[cite: 1]
+      2026: { ene: 70.3, feb: 52.2, mar: 70.0, abr: 46.7, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    num: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 52,  jun: null, jul: null, ago: null, sep: null, oct: null, nov: 63,  dic: null },[cite: 1]
+      2026: { ene: 26, feb: 12, mar: 21, abr: 14, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    den: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 115, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 122, dic: null },[cite: 1]
+      2026: { ene: 37, feb: 23, mar: 30, abr: 30, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "SI-02.03": {
+    nombre:  "Niños/as con Anemia a 6 Meses en Tratamiento con Dosajes de Control[cite: 1]",
+    detalle: "% niños/as con diagnóstico de anemia a los 6 meses que reciben hierro terapéutico + dosajes Hb de control. Solo verificación mayo/noviembre. HIS MINSA.[cite: 1]",
+    sector: "SI02", tab: 1, tipo: 'porcentaje', lb: 31.1, meta: 47, esCP: false,[cite: 1]
+    datos: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 51.4, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 56.9, dic: null },[cite: 1]
+      2026: { ene: 52.4, feb: 50.0, mar: 50, abr: 42.1, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    num: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 93,  jun: null, jul: null, ago: null, sep: null, oct: null, nov: 108, dic: null },[cite: 1]
+      2026: { ene: 11, feb: 9, mar: 9, abr: 8, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    den: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 181, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 190, dic: null },[cite: 1]
+      2026: { ene: 21, feb: 18, mar: 18, abr: 19, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "SI-02.04": {
+    nombre:  "Niños/as 12 Meses sin Anemia con Dosaje Hb a los 6 Meses[cite: 1]",
+    detalle: "% niños/as de 12 meses sin anemia que tuvieron dosaje de Hb registrado a los 6 meses. Padrón nominal. Solo verificación mayo/noviembre.[cite: 1]",
+    sector: "SI02", tab: 1, tipo: 'porcentaje', lb: 71.5, meta: 75.0, esCP: false,[cite: 1]
+    datos: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 42.8, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 48.3, dic: null },[cite: 1]
+      2026: { ene: 91.1, feb: 83.9, mar: 82.3, abr: 85.4, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    num: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 218, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 253, dic: null },[cite: 1]
+      2026: { ene: 184, feb: 182, mar: 214, abr: 205, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    den: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 509, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 524, dic: null },[cite: 1]
+      2026: { ene: 202, feb: 217, mar: 260, abr: 240, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "SI-03.01": {
+    nombre:  "Adolescentes Mujeres 12-17 con Dosaje de Hemoglobina (CP)[cite: 1]",
+    detalle: "CP — % adolescentes mujeres 12 a 17 años con dosaje de hemoglobina registrado en HIS. Condición previa para SI-03.02. Medición mensual.[cite: 1]",
+    sector: "SI03", tab: 1, tipo: 'porcentaje', lb: 77.2, meta: 83, esCP: true,[cite: 1]
+    datos: {
+      2025: { ene: 46.8, feb: 49.3, mar: 52.7, abr: 56.1, may: 59.4, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 63.2, dic: null },[cite: 1]
+      2026: { ene: 94.3, feb: 95.1, mar: 84.0, abr: 94.0,  may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    num: {
+      2025: { ene: 842, feb: 903, mar: 978, abr: 1053, may: 1128, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 1214, dic: null },[cite: 1]
+      2026: { ene: 1592, feb: 1341, mar: 1486, abr: 2268, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    den: {
+      2025: { ene: 1799, feb: 1832, mar: 1856, abr: 1877, may: 1899, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 1921, dic: null },[cite: 1]
+      2026: { ene: 1689, feb: 1410, mar: 1769, abr: 2414, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "SI-03.02": {
+    nombre:  "Adolescentes sin Anemia con Hierro Preventivo + Consejería + Control[cite: 1]",
+    detalle: "% adolescentes mujeres 12-17 sin anemia que reciben: suplemento hierro preventivo + consejería nutricional + dosaje Hb de control. Solo verificación mayo/noviembre.[cite: 1]",
+    sector: "SI03", tab: 1, tipo: 'porcentaje', lb: 77.2, meta: 20.0, esCP: false,[cite: 1]
+    datos: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 41.7, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 47.2, dic: null },[cite: 1]
+      2026: { ene: 6.6, feb: 3.0, mar: 1.1, abr: 26.7, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    num: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 384, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 451, dic: null },[cite: 1]
+      2026: { ene: 12, feb: 3.0, mar: 1, abr: 31, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    den: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 921, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 956, dic: null },[cite: 1]
+      2026: { ene: 183, feb: 100, mar: 92, abr: 116, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "VI-01.01": {
+    nombre:  "Gestantes con Tamizaje Positivo de Violencia (CP)[cite: 1]",
+    detalle: "CP — % gestantes con ficha de tamizaje aplicada en APN con resultado positivo (código HIS 96150.01 + R456). Refleja cobertura de tamizaje, no prevalencia. Medición mensual.[cite: 1]",
+    sector: "VI01", tab: 1, tipo: 'porcentaje', lb: 12.6, meta: 12.8, esCP: true,[cite: 1]
+    recomendacion: "Reforzar aplicación de ficha de tamizaje en APN. Coordinar con EESS el registro HIS código 96150.01 y sensibilizar al personal de salud.[cite: 1]",
+    datos: {
+      2025: { ene: 34.2, feb: 37.1, mar: 40.3, abr: 43.8, may: 46.9, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 50.7, dic: null },[cite: 1]
+      2026: { ene: 16.2, feb: 18.5, mar: 18.9, abr: 19.5,  may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    num: {
+      2025: { ene: 286, feb: 320, mar: 354, abr: 391, may: 424, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 458, dic: null },[cite: 1]
+      2026: { ene: 50, feb: 53, mar: 53, abr: 52, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    den: {
+      2025: { ene: 836, feb: 863, mar: 879, abr: 893, may: 904, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 904, dic: null },[cite: 1]
+      2026: { ene: 309, feb: 287, mar: 281, abr: 266, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  },
+  "VI-01.02": {
+    nombre:  "Gestantes con Dx Violencia que Reciben Paquete Mínimo (CSM + Psicoterapia)[cite: 1]",
+    detalle: "% gestantes con diagnóstico de violencia (R456) que reciben intervención terapéutica: consulta salud mental (CSM) + psicoterapia individual según mes del diagnóstico. Solo verificación mayo/noviembre. HIS MINSA.[cite: 1]",
+    sector: "VI01", tab: 1, tipo: 'porcentaje', lb: 42.9, meta: 47.9, esCP: false,[cite: 1]
+    recomendacion: "Asegurar que gestantes con Dx violencia (R456) reciban CSM y psicoterapia individual. Verificar registros HIS y cumplimiento de protocolo en EESS.[cite: 1]",
+    datos: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 28.4, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 33.7, dic: null },[cite: 1]
+      2026: { ene: 88.9, feb: 77.8, mar: 67.7, abr: 78.0, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    num: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 121, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 154, dic: null },[cite: 1]
+      2026: { ene: 8, feb: 21, mar: 44, abr: 71, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    },
+    den: {
+      2025: { ene: null, feb: null, mar: null, abr: null, may: 426, jun: null, jul: null, ago: null, sep: null, oct: null, nov: 457, dic: null },[cite: 1]
+      2026: { ene: 9, feb: 27, mar: 65, abr: 91, may: null, jun: null, jul: null, ago: null, sep: null, oct: null, nov: null, dic: null }[cite: 1]
+    }
+  }
+};
+
+const MESES_KEY = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];[cite: 1]
+const MESES_LBL = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];[cite: 1]
+const MESES_FULL = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];[cite: 1]
+
+let currentTab     = 1;[cite: 1]
+let activeKey      = null;[cite: 1]
+let trendChart     = null;[cite: 1]
+let modalChart     = null;[cite: 1]
+
+function cumplimientoBruto(value, meta, direccion) {[cite: 1]
+  if (value === null || value === undefined || meta === null || meta === undefined) return null;[cite: 1]
+  const dir = direccion || 'crecimiento';[cite: 1]
+  if (dir === 'reduccion') {[cite: 1]
+    if (value <= 0) return null;[cite: 1]
+    return (value <= meta) ? 100 : (meta / value) * 100;[cite: 1]
+  }
+  if (meta === 0) return value > 0 ? Infinity : null;[cite: 1]
+  return (value / meta) * 100;[cite: 1]
+}
+
+function cumplimiento(value, meta, direccion) {[cite: 1]
+  const c = cumplimientoBruto(value, meta, direccion);[cite: 1]
+  if (c === null) return null;[cite: 1]
+  return Math.min(100, c);[cite: 1]
+}
+
+function colorByCump(c) {[cite: 1]
+  if (c === null) return '#64748b'; /* Slate 500 */[cite: 1]
+  if (c >= 100)   return '#10b981'; /* Emerald 500 */[cite: 1]
+  if (c >= 70)    return '#b45309'; /* Ámbar de visibilidad alta en blanco */[cite: 1]
+  return '#ef4444'; /* Red 500 */[cite: 1]
+}
+function semClassByCump(c) {[cite: 1]
+  if (c === null) return 'sem-n';[cite: 1]
+  if (c >= 100)   return 'sem-g';[cite: 1]
+  if (c >= 70)    return 'sem-y';[cite: 1]
+  return 'sem-r';[cite: 1]
+}
+function semSymbolByCump(c) {[cite: 1]
+  if (c === null) return '?';[cite: 1]
+  if (c >= 100)   return '✓';[cite: 1]
+  if (c >= 70)    return '!';[cite: 1]
+  return '✗';[cite: 1]
+}
+
+function fmtVal(value, tipo) {[cite: 1]
+  if (value === null || value === undefined) return '—';[cite: 1]
+  if (tipo === 'entero') return Math.round(value).toString();[cite: 1]
+  return (Number.isInteger(value) ? value.toString() : value.toFixed(1));[cite: 1]
+}
+function unitSymbol(tipo) {[cite: 1]
+  return tipo === 'porcentaje' ? '%' : '';[cite: 1]
+}
+
+function getValueForMonth(key, year, monthIdx) {[cite: 1]
+  const d = (INDICADORES[key].datos[year] || {});[cite: 1]
+  let lastVal  = null;[cite: 1]
+  let lastIdx  = null;[cite: 1]
+
+  for (let i = 0; i <= monthIdx; i++) {[cite: 1]
+    const v = d[MESES_KEY[i]];[cite: 1]
+    if (v !== undefined && v !== null) { lastVal = v; lastIdx = i; }[cite: 1]
+  }
+
+  const current    = d[MESES_KEY[monthIdx]];[cite: 1]
+  const isFallback = (current === undefined || current === null) && lastVal !== null;[cite: 1]
+
+  return { value: lastVal, isFallback, fallbackIdx: isFallback ? lastIdx : null };[cite: 1]
+}
+
+function calcStats(tabId) {[cite: 1]
+  const year     = +document.getElementById('selYear').value;[cite: 1]
+  const monthIdx = +document.getElementById('selMonth').value;[cite: 1]
+  const keys     = Object.keys(INDICADORES).filter(k => INDICADORES[k].tab === tabId);[cite: 1]
+
+  let sumCump = 0, cnt = 0, g = 0, y = 0, r = 0;[cite: 1]
+
+  for (const k of keys) {[cite: 1]
+    const ind = INDICADORES[k];[cite: 1]
+    const { value: v } = getValueForMonth(k, year, monthIdx);[cite: 1]
+    const c = cumplimiento(v, ind.meta, ind.direccion);[cite: 1]
+    if (c !== null) {[cite: 1]
+      sumCump += c; cnt++;[cite: 1]
+      if (c >= 100)     g++;[cite: 1]
+      else if (c >= 70) y++;[cite: 1]
+      else              r++;[cite: 1]
+    }[cite: 1]
+  }
+
+  return { avg: cnt > 0 ? sumCump / cnt : null, green: g, yellow: y, red: r, total: keys.length };[cite: 1]
+}
+
+function updateGauge(tabId) {[cite: 1]
+  const s = calcStats(tabId);[cite: 1]
+
+  document.getElementById('nsGreen').textContent  = s.green;[cite: 1]
+  document.getElementById('nsYellow').textContent = s.yellow;[cite: 1]
+  document.getElementById('nsRed').textContent    = s.red;[cite: 1]
+  document.getElementById('nsTotal').textContent  = s.total;[cite: 1]
+
+  const year     = +document.getElementById('selYear').value;[cite: 1]
+  const monthIdx = +document.getElementById('selMonth').value;[cite: 1]
+  const pcEl = document.getElementById('periodCurrent');[cite: 1]
+  if (pcEl) pcEl.textContent = `Corte: ${MESES_FULL[monthIdx]} ${year}`;[cite: 1]
+}
+
+function getNDForMonth(key, year, monthIdx) {[cite: 1]
+  const ind = INDICADORES[key];[cite: 1]
+  if (!ind.num || !ind.den) return null;[cite: 1]
+  const yn = ind.num[year] || {}, yd = ind.den[year] || {};[cite: 1]
+  let ln = null, ld = null;[cite: 1]
+  for (let i = 0; i <= monthIdx; i++) {[cite: 1]
+    const n = yn[MESES_KEY[i]], d = yd[MESES_KEY[i]];[cite: 1]
+    if (n !== undefined && n !== null && d !== undefined && d !== null) { ln = n; ld = d; }[cite: 1]
+  }[cite: 1]
+  return (ln !== null && ld !== null) ? { num: ln, den: ld } : null;[cite: 1]
+}
+
+function buildCard(key) {[cite: 1]
+  const ind      = INDICADORES[key];[cite: 1]
+  const year     = +document.getElementById('selYear').value;[cite: 1]
+  const monthIdx = +document.getElementById('selMonth').value;[cite: 1]
+  const { value, isFallback, fallbackIdx } = getValueForMonth(key, year, monthIdx);[cite: 1]
+  const nd       = getNDForMonth(key, year, monthIdx);[cite: 1]
+
+  const tipo  = ind.tipo || 'porcentaje';[cite: 1]
+  const sym   = unitSymbol(tipo);[cite: 1]
+  const sufLB   = sym;[cite: 1]
+  const sufMeta = sym;[cite: 1]
+
+  const direccion = ind.direccion || 'crecimiento';[cite: 1]
+  const cump      = cumplimiento(value, ind.meta, direccion);[cite: 1]
+  const cumpRaw   = cumplimientoBruto(value, ind.meta, direccion);[cite: 1]
+  const clr  = colorByCump(cump);[cite: 1]
+  const sc   = semClassByCump(cump);[cite: 1]
+  const semS = semSymbolByCump(cump);[cite: 1]
+
+  const prog = cump !== null ? cump : 0;[cite: 1]
+  const sel  = activeKey === key ? 'active' : '';[cite: 1]
+
+  const valStr  = fmtVal(value, tipo);[cite: 1]
+  const cumpStr = cump !== null ? `${Math.round(cump)}%` : '—';[cite: 1]
+
+  const supera = (cumpRaw !== null && cumpRaw > 100);[cite: 1]
+  const deltaTxt = supera ? `+${Math.round(cumpRaw - 100)}% sobre meta` : '';[cite: 1]
+
+  let estadoBadge = '';[cite: 1]
+  if (cump !== null) {[cite: 1]
+    if (supera)           estadoBadge = `<span class="estado-badge estado-superada" title="${deltaTxt}">✓ Superada</span>`;[cite: 1]
+    else if (cump >= 100) estadoBadge = '<span class="estado-badge estado-cumplida">✓ Cumplida</span>';[cite: 1]
+    else if (cump >= 70)  estadoBadge = '<span class="estado-badge estado-proceso">! En proceso</span>';[cite: 1]
+    else                  estadoBadge = '<span class="estado-badge estado-critico">✗ Crítico</span>';[cite: 1]
+  }[cite: 1]
+
+  const unitExtra = (tipo === 'entero' && ind.unidad) ? `<span class="card-unit">${ind.unidad}</span>` : '';[cite: 1]
+
+  const dirBadge = (direccion === 'reduccion')[cite: 1]
+    ? '<span class="dir-badge" title="Indicador de reducción (menor es mejor)">↓ Reducción</span>'[cite: 1]
+    : '';[cite: 1]
+
+  let recomHTML = '';[cite: 1]
+  if (cump !== null && !supera && cump < 100) {[cite: 1]
+    const rawRecom = (ind.recomendacion && ind.recomendacion.trim()) ? ind.recomendacion : '';[cite: 1]
+    const txt180   = rawRecom ? rawRecom.slice(0, 180) : 'AÑADIR RECOMENDACIÓN';[cite: 1]
+    const cls      = cump < 70 ? 'recom-critico' : 'recom-proceso';[cite: 1]
+    const fbCls    = rawRecom ? '' : ' recom-fallback';[cite: 1]
+    recomHTML = `<div class="recom-box ${cls}${fbCls}" title="${txt180}">${txt180}</div>`;[cite: 1]
+  }[cite: 1]
+
+  let borderLeftStyle = `border-left: 4px solid #cbd5e1;`;
+  if (cump !== null) {
+    if (cump >= 100) borderLeftStyle = `border-left: 4px solid var(--green);`;
+    else if (cump >= 70) borderLeftStyle = `border-left: 4px solid var(--yellow);`;
+    else borderLeftStyle = `border-left: 4px solid var(--red);`;
+  }
+
+  return `
+<div class="card ${isFallback ? 'fallback' : ''} ${sel}" style="${borderLeftStyle}" onclick="selectCard('${key}')">
+  <div class="card-top">
+    <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
+      <div class="card-code">${key}</div>
+      ${ind.esCP ? '<span class="cp-badge">CP</span>' : ''}
+      ${dirBadge}
+    </div>
+    <div class="semaforo ${sc}" title="Cumplimiento: ${cumpStr}">${semS}</div>
+  </div>
+  <div class="card-name">${ind.nombre}</div>
+  <div class="card-val-row">
+    <div style="display:flex;align-items:baseline;gap:4px">
+      <span class="card-num" style="color:${clr}">${valStr}</span>
+      ${tipo === 'porcentaje' ? '<span class="card-unit">%</span>' : unitExtra}
+    </div>
+    <div class="lbmeta">
+      <span class="lb-pill">LB: ${ind.lb}${sufLB}</span>
+      <span class="meta-pill">Meta: ${ind.meta}${sufMeta}</span>
+    </div>
+  </div>
+  <div class="prog-track" title="Cumplimiento: ${cumpStr}">
+    <div class="prog-fill" style="width:${prog}%;background:${clr}"></div>
+  </div>
+  <div class="estado-row">${estadoBadge}</div>
+  ${nd ? `<div class="nd-row"><span>Num: <b>${nd.num}</b></span><span class="nd-sep">|</span><span>Den: <b>${nd.den}</b></span></div>` : ''}
+  ${isFallback
+    ? `<div class="fallback-note">⚠ Último dato disponible: ${MESES_LBL[fallbackIdx]}</div>`
+    : ''}
+  ${recomHTML}
+  <div class="card-trend-hint">📊 Ver tendencia mensual</div>
+</div>`;
+}
+
+function renderAll() {[cite: 1]
+  const fill = (id, sectorOrTab, tab) => {[cite: 1]
+    const el = document.getElementById(id);[cite: 1]
+    if (!el) return;[cite: 1]
+    el.innerHTML = Object.keys(INDICADORES)[cite: 1]
+      .filter(k => INDICADORES[k].tab === tab &&[cite: 1]
+                   (sectorOrTab === '*' || INDICADORES[k].sector === sectorOrTab))[cite: 1]
+      .map(buildCard).join('');[cite: 1]
+  };[cite: 1]
+
+  fill('grid-si01',  'SI01',      1);[cite: 1]
+  fill('grid-si02',  'SI02',      1);[cite: 1]
+  fill('grid-si03',  'SI03',      1);[cite: 1]
+  fill('grid-vi01',  'VI01',      1);[cite: 1]
+  fill('grid-ei',    'EI',        1);[cite: 1]
+  fill('grid-ai',    'AI',        1);[cite: 1]
+  fill('grid-art',   'ART',       1);[cite: 1]
+  
+  fill('grid-salud', 'SALUD',     2);[cite: 1]
+  fill('grid-edu',   'EDUCACION', 2);[cite: 1]
+}
+
+function selectCard(key) {[cite: 1]
+  activeKey = key;[cite: 1]
+  renderAll();[cite: 1]
+  openModal(key);[cite: 1]
+}
+
+function switchTab(tabId, btn) {[cite: 1]
+  currentTab = tabId;[cite: 1]
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));[cite: 1]
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));[cite: 1]
+  document.getElementById('pane-' + tabId).classList.add('active');[cite: 1]
+  btn.classList.add('active');[cite: 1]
+
+  if (activeKey && INDICADORES[activeKey].tab !== tabId) {[cite: 1]
+    activeKey = null;[cite: 1]
+  }[cite: 1]
+
+  updateGauge(tabId);[cite: 1]
+  renderAll();[cite: 1]
+}
+
+function updateTabCounters() {[cite: 1]
+  const t1 = Object.keys(INDICADORES).filter(k => INDICADORES[k].tab === 1).length;[cite: 1]
+  const t2 = Object.keys(INDICADORES).filter(k => INDICADORES[k].tab === 2).length;[cite: 1]
+  const el1 = document.getElementById('tabCount1');[cite: 1]
+  const el2 = document.getElementById('tabCount2');[cite: 1]
+  if (el1) el1.textContent = t1;[cite: 1]
+  if (el2) el2.textContent = t2;[cite: 1]
+}
+
+function updateDashboard() {[cite: 1]
+  updateGauge(currentTab);[cite: 1]
+  renderAll();[cite: 1]
+}
+
+function openModal(key) {[cite: 1]
+  const ind       = INDICADORES[key];[cite: 1]
+  const year      = +document.getElementById('selYear').value;[cite: 1]
+  const monthIdx  = +document.getElementById('selMonth').value;[cite: 1]
+  const rawDatos  = ind.datos[year] || {};[cite: 1]
+  const tipo      = ind.tipo || 'porcentaje';[cite: 1]
+  const sym       = unitSymbol(tipo);[cite: 1]
+  const direccion = ind.direccion || 'crecimiento';[cite: 1]
+
+  document.getElementById('modalCode').textContent      = key;[cite: 1]
+  document.getElementById('modalTitle').textContent     = ind.nombre;[cite: 1]
+  document.getElementById('modalSub').textContent       = ind.detalle;[cite: 1]
+  document.getElementById('modalPillMeta').textContent  = `Meta: ${ind.meta}${sym}`;[cite: 1]
+  document.getElementById('modalPillLB').textContent    = `LB: ${ind.lb}${sym}`;[cite: 1]
+  document.getElementById('modalPillTipo').textContent  = tipo === 'entero' ? `Entero (${ind.unidad || '#'})` : 'Porcentaje (%)';[cite: 1]
+
+  const modalYear  = +document.getElementById('selYear').value;[cite: 1]
+  const modalMonth = +document.getElementById('selMonth').value;[cite: 1]
+  const modalVal   = getValueForMonth(key, modalYear, modalMonth).value;[cite: 1]
+  const modalCump  = cumplimiento(modalVal, ind.meta, ind.direccion || 'crecimiento');[cite: 1]
+  const modalRaw   = cumplimientoBruto(modalVal, ind.meta, ind.direccion || 'crecimiento');[cite: 1]
+  const modalSupera = modalRaw !== null && modalRaw > 100;[cite: 1]
+
+  const prevRecom = document.getElementById('modalRecomBox');[cite: 1]
+  if (prevRecom) prevRecom.remove();[cite: 1]
+
+  if (modalCump !== null && !modalSupera && modalCump < 100) {[cite: 1]
+    const rawRecom = (ind.recomendacion && ind.recomendacion.trim()) ? ind.recomendacion : '';[cite: 1]
+    const txt180   = rawRecom ? rawRecom.slice(0, 180) : 'AÑADIR RECOMENDACIÓN';[cite: 1]
+    const recomCls = modalCump < 70 ? 'recom-critico' : 'recom-proceso';[cite: 1]
+    const fbCls    = rawRecom ? '' : ' recom-fallback';[cite: 1]
+    const recomEl  = document.createElement('div');[cite: 1]
+    recomEl.id        = 'modalRecomBox';[cite: 1]
+    recomEl.className = `modal-recom-box ${recomCls}${fbCls}`;[cite: 1]
+    recomEl.textContent = txt180;[cite: 1]
+    document.getElementById('modalSub').after(recomEl);[cite: 1]
+  }[cite: 1]
+
+  const barValues = MESES_KEY.map(m => {[cite: 1]
+    const v = rawDatos[m];[cite: 1]
+    return (v !== undefined && v !== null) ? v : null;[cite: 1]
+  });[cite: 1]
+
+  const barColors  = barValues.map(v => {[cite: 1]
+    if (v === null) return 'rgba(148, 163, 184, 0.2)';[cite: 1]
+    const c = cumplimiento(v, ind.meta, direccion);[cite: 1]
+    if (c >= 100) return '#10b981'; /* Verde */[cite: 1]
+    if (c >= 70)  return '#f59e0b'; /* Amarillo/Amber */[cite: 1]
+    return '#ef4444'; /* Rojo */[cite: 1]
+  });[cite: 1]
+  const barBorders = barColors.map(c => {[cite: 1]
+    if (c.startsWith('rgba')) return 'rgba(148, 163, 184, 0.4)';[cite: 1]
+    return c;[cite: 1]
+  });[cite: 1]
+
+  const activeColors  = [...barColors];[cite: 1]
+  const activeBorders = [...barBorders];[cite: 1]
+
+  let yMax;[cite: 1]
+  if (tipo === 'porcentaje') {[cite: 1]
+    yMax = 100;[cite: 1]
+  } else {[cite: 1]
+    const maxObs = Math.max(...barValues.filter(v => v !== null), ind.meta, ind.lb || 0);[cite: 1]
+    yMax = Math.ceil(maxObs * 1.18 / 10) * 10 || 10;[cite: 1]
+  }[cite: 1]
+
+  if (modalChart) { modalChart.destroy(); modalChart = null; }[cite: 1]
+
+  document.getElementById('trendModal').classList.add('open');[cite: 1]
+  document.body.style.overflow = 'hidden';[cite: 1]
+
+  const ctx = document.getElementById('modalChart').getContext('2d');[cite: 1]
+  modalChart = new Chart(ctx, {[cite: 1]
+    type: 'bar',[cite: 1]
+    plugins: [ChartDataLabels],[cite: 1]
+    data: {[cite: 1]
+      labels: MESES_LBL,[cite: 1]
+      datasets: [[cite: 1]
+        {
+          label: `${key}${sym ? ' (' + sym + ')' : ''}`,[cite: 1]
+          data: barValues,[cite: 1]
+          backgroundColor: activeColors,[cite: 1]
+          borderColor: activeBorders,[cite: 1]
+          borderWidth: 1.5,[cite: 1]
+          borderRadius: 6,[cite: 1]
+          order: 2[cite: 1]
+        },
+        {
+          label: `Meta: ${ind.meta}${sym}`,[cite: 1]
+          data: Array(12).fill(ind.meta),[cite: 1]
+          type: 'line',[cite: 1]
+          borderColor: '#2563eb', /* Azul Rey */[cite: 1]
+          borderWidth: 2.5,[cite: 1]
+          borderDash: [8, 5],[cite: 1]
+          pointRadius: 0,[cite: 1]
+          fill: false, tension: 0, order: 1[cite: 1]
+        },
+        {
+          label: `LB: ${ind.lb}${sym}`,[cite: 1]
+          data: Array(12).fill(ind.lb),[cite: 1]
+          type: 'line',[cite: 1]
+          borderColor: '#3b82f6', /* Celeste */[cite: 1]
+          borderWidth: 1.5,[cite: 1]
+          borderDash: [4, 4],[cite: 1]
+          pointRadius: 0,[cite: 1]
+          fill: false, tension: 0, order: 0[cite: 1]
+        }
+      ][cite: 1]
+    },[cite: 1]
+    options: {[cite: 1]
+      responsive: true,[cite: 1]
+      maintainAspectRatio: false,[cite: 1]
+      interaction: { mode: 'index', intersect: false },[cite: 1]
+      plugins: {[cite: 1]
+        datalabels: {[cite: 1]
+          display: ctx => ctx.datasetIndex === 0 && ctx.raw !== null && ctx.raw !== undefined,[cite: 1]
+          anchor: 'end',[cite: 1]
+          align: 'end',[cite: 1]
+          offset: 4,[cite: 1]
+          font: { weight: '700', size: 10, family: "'Inter', sans-serif" },[cite: 1]
+          color: '#0f172a',[cite: 1]
+          backgroundColor: '#ffffff',[cite: 1]
+          borderWidth: 1,
+          borderColor: '#e2e8f0',
+          borderRadius: 4,[cite: 1]
+          padding: { top: 2, bottom: 2, left: 5, right: 5 },[cite: 1]
+          formatter: (v, ctx) => {[cite: 1]
+            if (ctx.datasetIndex !== 0 || v === null || v === undefined) return null;[cite: 1]
+            return fmtVal(v, tipo) + sym;[cite: 1]
+          }[cite: 1]
+        },[cite: 1]
+        legend: { labels: { color: '#475569', font: { size: 11, weight: '600' }, boxWidth: 22, padding: 16 } },[cite: 1]
+        tooltip: {[cite: 1]
+          backgroundColor: '#0f172a',[cite: 1]
+          borderColor: '#1e293b',[cite: 1]
+          borderWidth: 1,[cite: 1]
+          titleColor: '#ffffff',[cite: 1]
+          bodyColor:  '#94a3b8',[cite: 1]
+          padding: 12,[cite: 1]
+          callbacks: {[cite: 1]
+            title: items => `${MESES_FULL[items[0].dataIndex]} ${year}`,[cite: 1]
+            label: ctx => {[cite: 1]
+              if (ctx.dataset.type === 'line') return `  ${ctx.dataset.label}`;[cite: 1]
+              const v = ctx.raw;[cite: 1]
+              if (v === null || v === undefined) return '  Sin dato';[cite: 1]
+              const c    = cumplimiento(v, ind.meta, direccion);[cite: 1]
+              const cRaw = cumplimientoBruto(v, ind.meta, direccion);[cite: 1]
+              let txt = `  Valor: ${fmtVal(v, tipo)}${sym}`;[cite: 1]
+              if (c !== null) {[cite: 1]
+                txt += `  ·  Cumpl: ${Math.round(c)}%`;[cite: 1]
+                if (cRaw > 100) txt += ` (+${Math.round(cRaw - 100)}% sobre meta)`;[cite: 1]
+              }[cite: 1]
+              return txt;[cite: 1]
+            },[cite: 1]
+            afterBody: items => {[cite: 1]
+              const barItem = items.find(i => i.dataset.order === 2);[cite: 1]
+              if (!barItem || barItem.raw === null) return [];[cite: 1]
+              return [[cite: 1]
+                `  ─────────────────`,[cite: 1]
+                `  Meta: ${ind.meta}${sym}`,[cite: 1]
+                `  Línea Base: ${ind.lb}${sym}`[cite: 1]
+              ];[cite: 1]
+            }[cite: 1]
+          }[cite: 1]
+        }[cite: 1]
+      },[cite: 1]
+      scales: {[cite: 1]
+        x: { ticks: { color: '#64748b', font: { size: 11, weight: '600' } }, grid:  { color: '#f1f5f9' } },[cite: 1]
+        y: {[cite: 1]
+          min: 0, max: yMax,[cite: 1]
+          ticks: { color: '#64748b', font: { size: 11 }, callback: v => sym ? v + sym : v },[cite: 1]
+          grid: { color: '#f1f5f9' }[cite: 1]
+        }[cite: 1]
+      }[cite: 1]
+    }[cite: 1]
+  });[cite: 1]
+}
+
+function closeModal() {[cite: 1]
+  document.getElementById('trendModal').classList.remove('open');[cite: 1]
+  document.body.style.overflow = '';[cite: 1]
+  if (modalChart) { modalChart.destroy(); modalChart = null; }[cite: 1]
+  activeKey = null;[cite: 1]
+  renderAll();[cite: 1]
+}
+
+function handleModalOverlayClick(e) {[cite: 1]
+  if (e.target === document.getElementById('trendModal')) closeModal();[cite: 1]
+}
+
+document.addEventListener('keydown', e => {[cite: 1]
+  if (e.key === 'Escape' && document.getElementById('trendModal').classList.contains('open')) {[cite: 1]
+    closeModal();[cite: 1]
+  }[cite: 1]
+});
+
+updateTabCounters();[cite: 1]
+updateDashboard();[cite: 1]
+</script>
+</body>
+</html>
